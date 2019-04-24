@@ -19,10 +19,13 @@ After installing the project, log in to the instance
 Open the test pages:
 
     BTC - http://localhost:4502/editor.html/content/challenge/cryptocurrencies/btc.html
+    <img src="https://www.dropbox.com/s/9xtgg08xvb0wfro/1-dialog-btc.png" alt="btc image"/>
 
     ETH - http://localhost:4502/editor.html/content/challenge/cryptocurrencies/eth.html
+    <img src="https://www.dropbox.com/s/5nspjjuujcvosh2/2-dialog-eth.png" alt="eth image"/>
 
     LTC - http://localhost:4502/editor.html/content/challenge/cryptocurrencies/ltc.html
+    <img src="https://www.dropbox.com/s/uw7xbod7aesbjxd/3-dialog-etc.png" alt="ltc image"/>
 
 
 ## Information about the back-end
@@ -30,12 +33,15 @@ Open the test pages:
 * The Sling Model reads the information form the crx repository located in the path /content/challenge/currencies
         Model: com.cab.challenge.core.models
 
-        ![alt text](https://www.dropbox.com/s/09k3zuli6bilypx/0-crx.png)
+        <img src="https://www.dropbox.com/s/09k3zuli6bilypx/0-crx.png" alt="crx image"/>
 
 * It will filter the information based in the values entered in the author interface
         Currency Name - for example "BTC"
         Currency Date - for example "20180507"
         Buying price - for example "14.32" (this is a very simple author interface, it could be improved by adding a list of possible prices from the backend)
+
+        <img src="https://www.dropbox.com/s/0cvbif84ax9914r/0-dialog.png" alt="dialog image"/>
+
 * The AEM Component will show the list of time-price for that currency in the entered date and calculate the "best profit"
 
 ## Notes
