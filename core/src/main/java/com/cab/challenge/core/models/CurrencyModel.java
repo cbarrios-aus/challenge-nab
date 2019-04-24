@@ -1,5 +1,5 @@
-/*
-
+/**
+ * @author cbarrios
  */
 package com.cab.challenge.core.models;
 
@@ -17,38 +17,57 @@ import org.apache.sling.models.annotations.Default;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.settings.SlingSettingsService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-@Model(adaptables=Resource.class, defaultInjectionStrategy= DefaultInjectionStrategy.OPTIONAL)
+@Model(adaptables = Resource.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 public class CurrencyModel {
 
     @Inject
     private SlingSettingsService settings;
 
-    @Inject @Named("sling:resourceType") @Default(values="No resourceType")
+    @Inject
+    @Named("sling:resourceType")
+    @Default(values = "No resourceType")
     protected String resourceType;
 
     @Inject
     private ResourceResolverFactory resolverFactory;
 
-    @Inject @Default(values="")
+    /**
+     * Currency name from the author dialog
+     */
+    @Inject
+    @Default(values = "")
     private String currencyName;
 
-    @Inject @Default(values="")
+    /**
+     * Currency date from the author dialog
+     */
+    @Inject
+    @Default(values = "")
     private String currencyDate;
 
-    @Inject @Default(values="")
+    /**
+     * Currency buying price from the author dialog
+     */
+    @Inject
+    @Default(values = "")
     private String currencyPrice;
 
     private List<Currency> listOfDetails = new ArrayList<>();
 
     private Currency profit;
 
-    private Currency bestProfit;
+    /**
+     * Logger
+     */
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     public CurrencyModel() {
     }
@@ -64,71 +83,52 @@ public class CurrencyModel {
 
         ResourceResolver resourceResolver = resolverFactory.getServiceResourceResolver(param);
 
+        //path in the crx repository with the information for the currencies
         Resource currencyResource = resourceResolver.getResource("/content/challenge/currencies/");
         Node rootNode = currencyResource.adaptTo(Node.class);
-        //resp.getWriter().write(" - " + node.getPath());
 
         NodeIterator currencies = rootNode.getNodes();
-        System.out.println("init--------- " + currencyName + " - " + currencyDate);
 
         //for each currency name
-        while(currencies.hasNext()) {
+        while (currencies.hasNext()) {
             Node currency = currencies.nextNode();
-            System.out.println("currency: " + currency.getName());
-
-            if(currency.getName().toLowerCase().equals(currencyName.toLowerCase())) {
+            //the currency from the dialog matches the node
+            if (currency.getName().toLowerCase().equals(currencyName.toLowerCase())) {
                 NodeIterator details = currency.getNodes();
-
-                while(details.hasNext()) {
+                while (details.hasNext()) {
                     Node detail = details.nextNode();
-                    System.out.println("    date: " + detail.getName());
-                    if(detail.getName().equals(currencyDate)) {
-
+                    //the date from the dailog matches the node
+                    if (detail.getName().equals(currencyDate)) {
                         PropertyIterator propertyIterator = detail.getProperties();
                         while (propertyIterator.hasNext()) {
                             Property property = propertyIterator.nextProperty();
-                            if(property.getName() != "jcr:primaryType") {
-                                System.out.println("        prop: " + property.getValue() + " " + property.getName());
-                                listOfDetails.add(new Currency(property.getName(),  property.getDouble()));
+                            if (property.getName() != "jcr:primaryType") {
+                                listOfDetails.add(new Currency(property.getName(), property.getDouble()));
                             }
 
                         }
                     }
                 }
             }
-
         }
 
-        // max profigit
-        //Profit profit = new Profit();
-
-        if(listOfDetails.size() > 0) {
-            Currency min = listOfDetails.get(0);
+        //there is information about currencies
+        if (listOfDetails.size() > 0) {
             Currency max = listOfDetails.get(0);
-
-            System.out.println("$$$$$$$$$$$$$$$$ " + listOfDetails.size());
             for (Currency curr : listOfDetails) {
                 System.out.println(curr.toString());
-                if (curr.getValue() < min.getValue()) {
-                    min = curr;
-                }
-
+                //highest price
                 if (curr.getValue() > max.getValue())
                     max = curr;
-
             }
 
-            System.out.println("min: " + min.toString());
-            System.out.println("max: " + max.toString());
-
-            System.out.println("max profit: " + (max.getValue() - Double.parseDouble(currencyPrice)));
-
+            //profit -> max - input from the author dialog
             BigDecimal profitValue = new BigDecimal(max.getValue() - Double.parseDouble(currencyPrice));
             profitValue = profitValue.setScale(2, BigDecimal.ROUND_HALF_EVEN);
 
-            System.out.println("best profit " + profitValue);
-
+            //pojo with the information about the best profit
             profit = new Currency(max.getTime(), profitValue.doubleValue());
+            logger.info("Max profit is [" + profitValue + "] for a buying price of[" + currencyPrice + "]");
 
         }
 
@@ -136,11 +136,11 @@ public class CurrencyModel {
     }
 
 
-    public String getCurrencyName(){
+    public String getCurrencyName() {
         return currencyName;
     }
 
-    public String getCurrencyDate(){
+    public String getCurrencyDate() {
         return currencyDate;
     }
 
@@ -156,7 +156,4 @@ public class CurrencyModel {
         return profit;
     }
 
-    public Currency getBestProfit() {
-        return bestProfit;
-    }
 }

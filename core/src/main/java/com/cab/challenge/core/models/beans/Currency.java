@@ -1,6 +1,8 @@
 package com.cab.challenge.core.models.beans;
 
-
+/**
+ * @author cbarrios
+ */
 public class Currency {
 
     private String time;
@@ -32,7 +34,14 @@ public class Currency {
     }
 
     public String getFormattedTime() {
-        return time.substring(0,2) + ":" + time.substring(2);
+        return time.substring(0, 2) + ":" + time.substring(2);
     }
 
+    @Override
+    public String toString() {
+        return "Currency{" +
+                "time='" + time + '\'' +
+                ", value=" + value +
+                '}';
+    }
 }

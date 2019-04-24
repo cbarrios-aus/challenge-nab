@@ -1,55 +1,40 @@
-# Sample AEM project template
+# AEM Challenge NAB
 
-This is a project template for AEM-based applications. It is intended as a best-practice set of examples as well as a potential starting point to develop your own functionality.
+This project is based in the Archetype 13 for AEM 6.4
 
-## Modules
-
-The main parts of the template are:
-
-* core: Java bundle containing all core functionality like OSGi services, listeners or schedulers, as well as component-related Java code such as servlets or request filters.
-* ui.apps: contains the /apps (and /etc) parts of the project, ie JS&CSS clientlibs, components, templates, runmode specific configs as well as Hobbes-tests
-* ui.content: contains sample content using the components from the ui.apps
-* ui.tests: Java bundle containing JUnit tests that are executed server-side. This bundle is not to be deployed onto production.
-* ui.launcher: contains glue code that deploys the ui.tests bundle (and dependent bundles) to the server and triggers the remote JUnit execution
+You need to have an AEM 6.4 instance in order to test the functionality
 
 ## How to build
 
-To build all the modules run in the project root directory the following command with Maven 3:
-
-    mvn clean install
-
-If you have a running AEM instance you can build and package the whole project and deploy into AEM with  
+To build and install, simple execute:
 
     mvn clean install -PautoInstallPackage
-    
-Or to deploy it to a publish instance, run
 
-    mvn clean install -PautoInstallPackagePublish
-    
-Or alternatively
+## Testing Content pages
 
-    mvn clean install -PautoInstallPackage -Daem.port=4503
+After installing the project, log in to the instance
 
-Or to deploy only the bundle to the author, run
+    http://localhost:4502/
 
-    mvn clean install -PautoInstallBundle
+Open the test pages:
 
-## Testing
+    BTC - http://localhost:4502/editor.html/content/challenge/cryptocurrencies/btc.html
 
-There are three levels of testing contained in the project:
+    ETH - http://localhost:4502/editor.html/content/challenge/cryptocurrencies/eth.html
 
-* unit test in core: this show-cases classic unit testing of the code contained in the bundle. To test, execute:
+    LTC - http://localhost:4502/editor.html/content/challenge/cryptocurrencies/ltc.html
 
-    mvn clean test
 
-* server-side integration tests: this allows to run unit-like tests in the AEM-environment, ie on the AEM server. To test, execute:
+## Information about the back-end
 
-    mvn clean verify -PintegrationTests
 
-* client-side Hobbes.js tests: JavaScript-based browser-side tests that verify browser-side behavior. To test:
-
-    in the browser, open the page in 'Developer mode', open the left panel and switch to the 'Tests' tab and find the generated 'MyName Tests' and run them.
-
+* The Sling Model reads the information form the crx repository located in the path /content/challenge/currencies
+        Model: com.cab.challenge.core.models
+* It will filter the information based in the values entered in the author interface
+        Currency Name - for example "BTC"
+        Currency Date - for example "20180507"
+        Buying price - for example "14.32" (this is a very simple author interface, it could be improved by adding a list of possible prices from the backend)
+* The AEM Component will show the list of time-price for that currency in the entered date and calculate the "best profit"
 
 ## Maven settings
 
