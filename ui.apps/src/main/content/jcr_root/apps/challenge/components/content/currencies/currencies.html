@@ -1,0 +1,19 @@
+
+
+<sly data-sly-use.currency="com.cab.challenge.core.models.CurrencyModel">
+
+    <h1>CURRENCY: ${currency.currencyName} - Date: ${currency.currencyDate}</h1>
+    <b>Buying price: ${properties.currencyPrice}</b>
+
+    <dl data-sly-list="${currency.listOfDetails}">
+        <dt><b>Time: </b>${item.formattedTime}</dt>
+        <dd><b>Price:</b> $${item.value}</dd>
+    </dl>
+
+    <div>
+        The best profit that would have been made from buying at <b>${properties.currencyPrice}</b> and selling at
+        <b>${currency.profit.formattedTime}</b> is <b>$${currency.profit.value}</b>
+    </div>
+
+</sly>
+
