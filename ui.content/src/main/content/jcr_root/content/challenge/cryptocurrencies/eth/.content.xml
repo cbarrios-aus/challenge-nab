@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:lastModified="{Date}2019-04-24T15:42:00.014+10:00"
+        cq:lastModifiedBy="admin"
+        cq:template="/conf/challenge/settings/wcm/templates/content-page"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="ETH"
+        sling:resourceType="challenge/components/structure/page">
+        <root
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="wcm/foundation/components/responsivegrid">
+            <responsivegrid
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="wcm/foundation/components/responsivegrid">
+                <currencies
+                    jcr:created="{Date}2019-04-24T15:41:43.039+10:00"
+                    jcr:createdBy="admin"
+                    jcr:lastModified="{Date}2019-04-24T15:42:00.011+10:00"
+                    jcr:lastModifiedBy="admin"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="challenge/components/content/currencies"
+                    currencyDate="20180507"
+                    currencyName="ETH"
+                    currencyPrice="1.45"/>
+            </responsivegrid>
+        </root>
+    </jcr:content>
+</jcr:root>
