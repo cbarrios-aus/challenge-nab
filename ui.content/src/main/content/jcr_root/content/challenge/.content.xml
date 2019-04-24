@@ -1,19 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
     jcr:primaryType="cq:Page">
-    <jcr:content
-        cq:allowedTemplates="[/conf/challenge/settings/wcm/templates/.*]"
-        cq:deviceGroups="[/etc/mobile/groups/responsive]"
-        jcr:primaryType="nt:unstructured"
-        jcr:title="challenge"
-        sling:redirect="{Boolean}true"
-        sling:redirectStatus="{Long}302"
-        sling:resourceType="foundation/components/redirect"
-        redirectTarget="/content/challenge/en">
-        <image jcr:primaryType="nt:unstructured">
-            <file/>
-        </image>
-    </jcr:content>
+    <jcr:content/>
     <en/>
     <fr/>
+    <currencies jcr:primaryType="nt:unstructured">
+        <btc
+            jcr:primaryType="nt:unstructured"
+            name="BTC">
+            <_x0032_0180507
+                jcr:primaryType="nt:unstructured"
+                _x0030_915="{Double}34.98"
+                _x0031_045="{Double}36.13"
+                _x0031_230="{Double}37.01"
+                _x0031_400="{Double}35.98"
+                _x0031_530="{Double}33.56"/>
+            <_x0032_0180508
+                jcr:primaryType="nt:unstructured"
+                _x0030_915="{Double}34.98"
+                _x0031_045="{Double}36.13"
+                _x0031_400="{Double}35.98"
+                _x0031_530="{Double}33.56"
+                _x0031_600="{Long}40"
+                _x0031_630="{Long}30"/>
+        </btc>
+        <eth
+            jcr:primaryType="nt:unstructured"
+            name="BTC">
+            <_x0032_0180507
+                jcr:primaryType="nt:unstructured"
+                _x0030_900="{Double}1.45"
+                _x0031_030="{Double}1.87"
+                _x0031_245="{Double}1.55"
+                _x0031_515="{Double}2.01"
+                _x0031_700="{Double}2.15"/>
+        </eth>
+        <ltc jcr:primaryType="nt:unstructured">
+            <_x0032_0180507
+                jcr:primaryType="nt:unstructured"
+                _x0030_930="{Double}14.32"
+                _x0031_115="{Double}14.87"
+                _x0031_245="{Double}15.03"
+                _x0031_400="{Double}14.76"
+                _x0031_700="{Double}14.15"/>
+        </ltc>
+    </currencies>
+    <cryptocurrencies/>
 </jcr:root>
