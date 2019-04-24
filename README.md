@@ -27,7 +27,6 @@ Open the test pages:
 
 ## Information about the back-end
 
-
 * The Sling Model reads the information form the crx repository located in the path /content/challenge/currencies
         Model: com.cab.challenge.core.models
 * It will filter the information based in the values entered in the author interface
@@ -35,6 +34,19 @@ Open the test pages:
         Currency Date - for example "20180507"
         Buying price - for example "14.32" (this is a very simple author interface, it could be improved by adding a list of possible prices from the backend)
 * The AEM Component will show the list of time-price for that currency in the entered date and calculate the "best profit"
+
+## Notes
+
+* In order to get access to the jcr repository will need to add a service user "challengeServiceUser" and give it the read permissions.
+
+        https://helpx.adobe.com/au/experience-manager/6-4/sites/administering/using/security-service-users.html#Creatinganewserviceuser
+
+* The classes used for backend code are:
+        CurrencyModel.java
+        Currency.java
+
+* The AEM test component "Currencies Component" is located in "ui.apps/src/main/content/jcr_root/apps/challenge/components/content/currencies/currencies.html"
+
 
 ## Maven settings
 

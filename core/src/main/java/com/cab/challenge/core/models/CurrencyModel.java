@@ -80,7 +80,6 @@ public class CurrencyModel {
 
         //OSGi "Service User Mapper" config -> challenge.core:challengeServiceUser=challengeServiceUser
         param.put(ResourceResolverFactory.SUBSERVICE, "challengeServiceUser");
-
         ResourceResolver resourceResolver = resolverFactory.getServiceResourceResolver(param);
 
         //path in the crx repository with the information for the currencies
