@@ -29,6 +29,9 @@ Open the test pages:
 
 * The Sling Model reads the information form the crx repository located in the path /content/challenge/currencies
         Model: com.cab.challenge.core.models
+
+        ![alt text](https://www.dropbox.com/s/09k3zuli6bilypx/0-crx.png)
+
 * It will filter the information based in the values entered in the author interface
         Currency Name - for example "BTC"
         Currency Date - for example "20180507"

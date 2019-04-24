@@ -79,11 +79,11 @@ public class CurrencyModel {
         HashMap<String, Object> param = new HashMap<>();
 
         //OSGi "Service User Mapper" config -> challenge.core:challengeServiceUser=challengeServiceUser
-        param.put(ResourceResolverFactory.SUBSERVICE, "challengeServiceUser");
+        param.put(ResourceResolverFactory.SUBSERVICE, Constants.SERVICE_USER);
         ResourceResolver resourceResolver = resolverFactory.getServiceResourceResolver(param);
 
         //path in the crx repository with the information for the currencies
-        Resource currencyResource = resourceResolver.getResource("/content/challenge/currencies/");
+        Resource currencyResource = resourceResolver.getResource(Constants.ROOT_PATH);
         Node rootNode = currencyResource.adaptTo(Node.class);
 
         NodeIterator currencies = rootNode.getNodes();
@@ -96,12 +96,13 @@ public class CurrencyModel {
                 NodeIterator details = currency.getNodes();
                 while (details.hasNext()) {
                     Node detail = details.nextNode();
-                    //the date from the dailog matches the node
+                    //the date from the dialog matches the node
                     if (detail.getName().equals(currencyDate)) {
                         PropertyIterator propertyIterator = detail.getProperties();
                         while (propertyIterator.hasNext()) {
                             Property property = propertyIterator.nextProperty();
-                            if (property.getName() != "jcr:primaryType") {
+                            //ignore the "jcr:primaryType" property
+                            if (property.getName() != Constants.JCR_PRIMARY_TYPE) {
                                 listOfDetails.add(new Currency(property.getName(), property.getDouble()));
                             }
 
